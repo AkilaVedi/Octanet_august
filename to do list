@@ -1,0 +1,42 @@
+class ToDoList:
+    def __init__(self):
+        self.tasks = []
+    def add_task(self, task):
+        self.tasks.append({"task": task, "completed": False})
+        print(f"Added task: '{task}'")
+    def mark_task(self, task_index):
+        if 0 <= task_index < len(self.tasks):
+            self.tasks[task_index]["completed"] = True
+            print(f"Marked task '{self.tasks[task_index]['task']}' as complete")
+        else:
+            print("Invalid task index")
+    def edit_task(self, task_index, new_task):
+        if 0 <= task_index < len(self.tasks):
+            old_task = self.tasks[task_index]['task']
+            self.tasks[task_index]["task"] = new_task
+            print(f"Edited task: '{old_task}' to '{new_task}'")
+        else:
+            print("Invalid task index")
+    def delete_task(self, task_index):
+        if 0 <= task_index < len(self.tasks):
+            deleted_task = self.tasks.pop(task_index)
+            print(f"Deleted task: '{deleted_task['task']}'")
+        else:
+            print("Invalid task index")
+    def show_tasks(self):
+        if not self.tasks:
+            print("No tasks in the list")
+        else:
+            for i, task in enumerate(self.tasks):
+                status = "Done" if task["completed"] else "Not done"
+                print(f"{i + 1}. {task['task']} - {status}")
+# Example Usage
+todo = ToDoList()
+todo.add_task("Buy groceries")
+todo.add_task("Read a book")
+todo.show_tasks()
+todo.mark_task(0)
+todo.edit_task(1, "Read a Python book")
+todo.show_tasks()
+todo.delete_task(0)
+todo.show_tasks()
